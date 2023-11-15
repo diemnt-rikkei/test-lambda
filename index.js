@@ -828,28 +828,47 @@ try {
     // 7
     async function uploadConversations() {
       try {
-        const fiveLastestConversation = await queryDatabase(
+        const lastestConversation = await queryDatabase(
           connectionInstance,
           sqlSelectConversations()
         );
-console.log(1, fiveLastestConversation);
+
         const data = [];
-        for await (const conversation of fiveLastestConversation) {
+        for await (const conversation of lastestConversation) {
           const fiveLastestConversationContent = await queryDatabase(
             connectionInstance,
             sqlSelectConversationContents(conversation.id)
           );
+          const row = {
+            doctorNameKana: `${conversation.lastnameKana} ${conversation.firstnameKana}`,
+            doctorPhone: conversation.phoneNumber,
+            sendingTime1: "",
+            createdBy1: "",
+            content1: "",
+            sendingTime2: "",
+            createdBy2: "",
+            content2: "",
+            sendingTime3: "",
+            createdBy3: "",
+            content3: "",
+            sendingTime4: "",
+            createdBy4: "",
+            content4: "",
+            sendingTime5: "",
+            createdBy5: "",
+            content5: "",
+          };
 
-          data.push(
-            ...fiveLastestConversationContent.map((item) => ({
-              doctorName: `${conversation.lastname} ${conversation.firstname}`,
-              doctorNameKana: `${conversation.lastnameKana} ${conversation.firstnameKana}`,
-              doctorPhone: conversation.phoneNumber,
-              sendingTime: moment(item.createdAt).format("YYYY-MM-DD HH:mm"),
-              createdBy: item.isCreatedByStaff ? "医師" : "スタッフ",
-              content: item.message,
-            }))
-          );
+          fiveLastestConversationContent.forEach((item, index) => {
+            row[`sendingTime${index + 1}`] = moment(item.createdAt).format(
+              "YYYY-MM-DD HH:mm"
+            );
+            row[`createdBy${index + 1}`] = item.isCreatedByStaff
+              ? "医師"
+              : "スタッフ";
+            row[`content${index + 1}`] = item.message;
+          });
+          data.push(row);
         }
 
         const fields = fieldConversationsCsv();

@@ -314,12 +314,23 @@ const fieldsDoctorsCsv = () => [
 ];
 
 const fieldConversationsCsv = () => [
-  { label: "医師名", value: "doctorName" },
-  { label: "フリガナ", value: "doctorNameKana" },
+  { label: "イシメイ", value: "doctorNameKana" },
   { label: "電話番号", value: "doctorPhone" },
-  { label: "送信時間", value: "sendingTime" },
-  { label: "送信者", value: "createdBy" },
-  { label: "送信内容", value: "content" },
+  { label: "日付1", value: "sendingTime1" },
+  { label: "送信者1", value: "createdBy1" },
+  { label: "内容1", value: "content1" },
+  { label: "日付2", value: "sendingTime2" },
+  { label: "送信者2", value: "createdBy2" },
+  { label: "内容2", value: "content2" },
+  { label: "日付3", value: "sendingTime3" },
+  { label: "送信者3", value: "createdBy3" },
+  { label: "内容3", value: "content3" },
+  { label: "日付4", value: "sendingTime4" },
+  { label: "送信者4", value: "createdBy4" },
+  { label: "内容4", value: "content4" },
+  { label: "日付5", value: "sendingTime5" },
+  { label: "送信者5", value: "createdBy5" },
+  { label: "内容5", value: "content5" },
 ];
 
 module.exports = {
