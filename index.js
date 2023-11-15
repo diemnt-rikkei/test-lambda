@@ -864,8 +864,8 @@ try {
               "YYYY-MM-DD HH:mm"
             );
             row[`createdBy${index + 1}`] = item.isCreatedByStaff
-              ? "医師"
-              : "スタッフ";
+              ? "スタッフ"
+              : "医師";
             row[`content${index + 1}`] = item.message;
           });
           data.push(row);
