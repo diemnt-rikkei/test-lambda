@@ -289,7 +289,7 @@ const sqlSelectConversationContents = (conversationId) => `
   limit 5;
 `;
 
-module.exports = {
+export default {
   sqlAcceptedSelectWorkSchedule,
   sqlSatisfieldshifts,
   sqlUnfulfilledshifts,

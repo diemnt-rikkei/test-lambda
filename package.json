@@ -2,18 +2,22 @@
   "name": "lambda",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1487.0",
+    "dotenv": "^16.3.1",
     "json2csv": "^6.0.0-alpha.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "moment-range": "^4.0.2",
+    "moment-timezone": "^0.5.43",
     "mysql": "^2.18.1"
   }
 }

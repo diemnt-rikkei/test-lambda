@@ -1,13 +1,14 @@
-const Moment = require("moment");
-const { extendMoment } = require("moment-range");
-const {
+import Moment from "./moment.js";
+import momentRange from "moment-range";
+import {
+  FORMAT_HOURS,
   FORMAT_DATE,
   TIME_START_DEFAULT,
-  FORMAT_HOURS,
-  FORMAT_TIME,
   DATE_DEFAULT,
-} = require("./constant");
-const moment = extendMoment(Moment);
+  FORMAT_TIME,
+} from "./constant.js";
+
+const moment = momentRange.extendMoment(Moment);
 
 const getDepartmentNameJP = (departmentName) => {
   let name = "";
@@ -368,7 +369,7 @@ const getRegistrationStatusJP = (registrationStatus) => {
   return name;
 };
 
-module.exports = {
+export default {
   getDepartmentNameJP,
   getAvailableShiftTypesJP,
   getIntroductionHistoryTypeJP,

@@ -1,45 +1,47 @@
-const AWS = require("aws-sdk");
-const moment = require("moment");
-const { Parser } = require("json2csv");
+import AWS from "aws-sdk";
+import moment from "./moment.js";
+import { Parser } from "json2csv";
+import dotenv from "dotenv";
+dotenv.config();
 
 const s3 = new AWS.S3({
-  accessKeyId: "accessKeyId",
-  secretAccessKey: "secretAccessKey",
-  region: "region",
+  accessKeyId: process.env.S3_ACCESS_KEY,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: "ap-northeast-1",
 });
 
-// TODO update env bucket name
 const uploadAWS = async (filename, fields, data) => {
-  const csv = new Parser({ fields, withBOM: true });
-  const content = csv.parse(data);
+  try {
+    const csv = new Parser({ fields, withBOM: true });
+    const content = csv.parse(data);
 
-  //   const Bucket = process.env.LOG_BUCKET_NAME;
-  const Bucket = "caps-clinic-csv";
-  const params = {
-    Bucket,
-    Key: `${moment().format("DD-MM-YYYY")}/${moment().format(
-      "DD-MM-YYYY-HH"
-    )}/${filename}`,
-    Body: Buffer.from(content),
-  };
+    const Bucket = process.env.BUCKET_NAME;
+    const params = {
+      Bucket,
+      Key: `${moment().format("YYYY-MM-DD")}/${moment().format(
+        "YYYY-MM-DD-HH"
+      )}/${filename}`,
+      Body: Buffer.from(content),
+      ContentType: 'text/csv',
+    };
 
-  const options = {
-    partSize: 10 * 1024 * 1024, // 10 MB
-    queueSize: 10,
-  };
+    console.log("before upload", params);
+    await s3
+      .putObject(params, (err) => {
+        if (err) {
+          console.error("Upload AWS is failed.", err);
+          return err;
+        }
+      })
+      .promise();
+    console.log("after upload");
 
-  await s3
-    .upload(params, options, (err) => {
-      if (err) {
-        logger.error("Upload AWS is failed.", err);
-        return err;
-      }
-    })
-    .promise();
-
-  return null;
+    return null;
+  } catch (error) {
+    console.error("Upload AWS is error.", error);
+  }
 };
 
-module.exports = {
+export default {
   uploadAWS,
 };

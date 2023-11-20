@@ -1,4 +1,4 @@
-const _ = require("lodash");
+import _ from "lodash";
 
 const getMaxComment = (results) => {
   let maxComment = 1;
@@ -333,7 +333,7 @@ const fieldConversationsCsv = () => [
   { label: "内容5", value: "content5" },
 ];
 
-module.exports = {
+export default {
   getMaxComment,
   getMaxDoctorSubsidy,
   fieldsAcceptedWorkScheduleCsv,
