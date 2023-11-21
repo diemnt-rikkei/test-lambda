@@ -229,7 +229,7 @@ export const handler = async (event) => {
         "確定シフト_",
         `${moment().format("MM")}月${moment().format("DD")}日${moment().format("HH")}時${moment().format("mm")}分.CSV`,
       ].join("");
-console.log('filename', filename);
+
       const fields = fieldsAcceptedWorkScheduleCsv(
         getMaxComment(listWorkSchedules),
         getMaxDoctorSubsidy(listWorkSchedules)
@@ -365,8 +365,6 @@ console.log('filename', filename);
         "未充足シフト_",
         `${moment().format("MM")}月${moment().format("DD")}日${moment().format("HH")}時${moment().format("mm")}分.CSV`,
       ].join("");
-console.log('filename', filename);
-
       const sortedResult = resultUnconfirmedShifts.sort(
         (a, b) => moment(a.sort) - moment(b.sort)
       );
@@ -551,8 +549,6 @@ console.log('filename', filename);
         "半未充足シフト_",
         `${moment().format("MM")}月${moment().format("DD")}日${moment().format("HH")}時${moment().format("mm")}分.CSV`,
       ].join("");
-console.log('filename', filename);
-
       const sortedResult = resultUnconfirmedShifts.sort(
         (a, b) => moment(a.sort) - moment(b.sort)
       );
@@ -698,7 +694,6 @@ console.log('filename', filename);
         "募集シフト_",
         `${moment().format("MM")}月${moment().format("DD")}日${moment().format("HH")}時${moment().format("mm")}分.CSV`,
       ].join("");
-      console.log('filename', filename);
 
       await uploadAWS(filename, fields, results);
     } catch (error) {
@@ -770,7 +765,6 @@ console.log('filename', filename);
       "応募シフト_",
       `${moment().format("MM")}月${moment().format("DD")}日${moment().format("HH")}時${moment().format("mm")}分.CSV`,
     ].join("");
-    console.log('filename', filename);
 
     await uploadAWS(filename, fields, listUnique);
   }
@@ -841,7 +835,6 @@ console.log('filename', filename);
         "医師情報一覧_",
         `${moment().format("MM")}月${moment().format("DD")}日${moment().format("HH")}時${moment().format("mm")}分.CSV`,
       ].join("");
-      console.log('filename', filename);
 
       await uploadAWS(filename, fields, lstUniq);
     } catch (error) {
@@ -900,7 +893,6 @@ console.log('filename', filename);
         "お問い合わせ管理_",
         `${moment().format("MM")}月${moment().format("DD")}日${moment().format("HH")}時${moment().format("mm")}分.CSV`,
       ].join("");
-console.log('filename', filename);
 
       await uploadAWS(filename, fields, data);
     } catch (error) {
