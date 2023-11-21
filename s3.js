@@ -22,10 +22,9 @@ const uploadAWS = async (filename, fields, data) => {
         "YYYY-MM-DD-HH"
       )}/${filename}`,
       Body: Buffer.from(content),
-      ContentType: 'text/csv',
+      ContentType: "text/csv",
     };
 
-    console.log("before upload", params);
     await s3
       .putObject(params, (err) => {
         if (err) {
@@ -34,7 +33,6 @@ const uploadAWS = async (filename, fields, data) => {
         }
       })
       .promise();
-    console.log("after upload");
 
     return null;
   } catch (error) {
